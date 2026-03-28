@@ -13,8 +13,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
-mongoose.connect("mongodb://localhost:27017/peliculas_db")
+// 🔥 CONEXIÓN 
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("Conectado a MongoDB"))
 .catch(err => console.log(err));
 
@@ -28,7 +28,8 @@ app.get("/", (req, res) => {
   res.send("API de Películas funcionando");
 });
 
-const PORT = 3000;
+// 🔥 PUERTO
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log("Servidor corriendo en puerto " + PORT);
